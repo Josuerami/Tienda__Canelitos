@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Inventario sobre Productos</h2>
+<table>
+    <tr>
+        <th>Nombre del producto</th>
+        <th>Descripcion</th>
+        <th>Fecha de compra</th>
+        <th>Activo</th>
+    </tr>
+    <tr>
+        <td>refresco coca cola</td>
+        <td>cocacola</td>
+        <td>15 oct 2025</td>
+        <td>vComoletedv600L</td>
+    </tr>
+    <tr>
+        <td>Botella de agua</td>
+        <td>aguade1l</td>
+        <td>15 oct 2025</td>
+        <td>Blockedv</td>
+    </tr>
+</table>
+
+<h3>Consultar producto</h3>
+<table>
+    <tr>
+        <th>Producto</th>
+        <th>Cantidad en existencia</th>
+        <th>Eliminar producto del inventario</th>
+        <th>modificar Cantidad</th>
+        <th>Precio</th>
+    </tr>
+    <tr>
+        <td>COLA Coca-cola de 3 Its</td>
+        <td>5</td>
+        <td><a href="#" class="btn">Eliminar</a></td>
+        <td><input type="number" value="7"></td>
+        <td>35$</td>
+    </tr>
+</table>
+{% endblock %}

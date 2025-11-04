@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tienda Canelitos - Registro</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .auth-container { min-height: 100vh; display:flex; align-items:center; justify-content:center; background: linear-gradient(180deg, #fee2e2, #fff); }
+    .auth-card { width: 100%; max-width: 460px; background: #fff; border:1px solid #e5e7eb; border-radius: 16px; box-shadow: 0 10px 30px rgba(255, 0, 0, .1); padding: 22px; }
+    .auth-title { text-align:center; color:#b91c1c; margin: 0 0 10px; }
+    .auth-sub { text-align:center; color:#ef4444; margin: 0 0 18px; font-weight:700; }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <h2 class="auth-title">Tienda Canelitos</h2>
+      <div class="auth-sub">Crear cuenta</div>
+      <form method="POST">
+        <label>Nombre</label>
+        <input name="name" required>
+        <label>Correo/Teléfono</label>
+        <input name="user" required>
+        <label>Contraseña</label>
+        <input type="password" name="password" required>
+        <button type="submit" class="btn" style="width:100%; margin-top:14px;">Registrarme</button>
+        <a href="{{ url_for('login') }}" class="btn secondary" style="width:100%; margin-top:8px;">Iniciar sesión</a>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

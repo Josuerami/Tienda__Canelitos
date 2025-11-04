@@ -1,0 +1,92 @@
+/* Tema Tienda Canelitos - limpio con acento rojo y botones claros */
+:root {
+  --bg: #f8fafc;          /* fondo suave */
+  --card: #ffffff;        /* tarjetas */
+  --text: #0f172a;        /* texto principal */
+  --muted: #64748b;       /* texto secundario */
+  --primary: #b91c1c;     /* rojo acento */
+  --primary-600: #991b1b; /* rojo más oscuro hover */
+  --primary-100: #fee2e2; /* rojo muy claro */
+  --accent: #b91c1c;      /* rojo acento para links */
+  --success: #16a34a;     /* verde para acciones de éxito */
+  --warning: #f59e0b;     /* ámbar para advertencias */
+  --border: #e2e8f0;      /* bordes */
+  --shadow: 0 6px 16px rgba(2, 6, 23, .08);
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0; color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, Noto Sans, "Helvetica Neue", "Apple Color Emoji", "Segoe UI Emoji";
+  /* Fondo bonito y sutil con tonos rojos pastel */
+  background: linear-gradient(180deg, #fff7f7 0%, #fff 40%), radial-gradient(circle at 10% 10%, rgba(185,28,28,0.04), transparent 10%), radial-gradient(circle at 90% 90%, rgba(185,28,28,0.02), transparent 10%);
+  background-blend-mode: overlay, normal, normal;
+}
+
+header {
+  position: sticky; top: 0; z-index: 50;
+  background: linear-gradient(90deg, var(--primary), #7f1d1d);
+  color: white; padding: 12px 20px; box-shadow: var(--shadow);
+}
+header h1 { margin: 0; font-size: 20px; letter-spacing: .5px; }
+header .user-info { font-size: 14px; }
+header .user-info a { color: #fff; text-decoration: underline; }
+
+main { max-width: 1100px; margin: 24px auto; padding: 0 18px; }
+footer { background: #0b1220; color: #cbd5e1; padding: 24px; margin-top: 40px; text-align: center; }
+
+/* Botones visibles y con buen contraste */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 14px; border-radius: 10px; border: 1.5px solid var(--primary-600);
+  background: var(--primary); color: #fff !important; font-weight: 700; font-size: 14px;
+  text-decoration: none !important; cursor: pointer; line-height: 1.1; min-height: 36px;
+  box-shadow: 0 6px 20px rgba(185,28,28,0.15); transition: transform .12s ease, background .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.btn:hover { background: var(--primary-600); border-color: #7f1d1d; transform: translateY(-1px); box-shadow: 0 10px 30px rgba(185,28,28,0.18); }
+.btn:active { transform: translateY(0); }
+.btn:focus { outline: 3px solid rgba(249, 168, 168, 0.6); outline-offset: 2px; }
+
+/* Variantes */
+.btn.secondary { background: #f3f4f6; color: #111827 !important; border-color: #d1d5db; }
+.btn.secondary:hover { background: #e5e7eb; border-color: #9ca3af; }
+.btn.success { background: var(--success); border-color: var(--success); }
+.btn.success:hover { filter: none; }
+.btn.warning { background: var(--warning); color: #111827 !important; border-color: var(--warning); }
+.btn.warning:hover { filter: none; }
+
+/* Botones en el header: que se vean reales, no transparentes */
+header .btn { background: #ffffff; color: var(--primary) !important; border-color: #ffffff; box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); }
+header .btn:hover { background: #f1f8ff; border-color: #dbeafe; }
+
+/* Tarjetas y grillas */
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.product-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; box-shadow: var(--shadow); }
+.product-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; background: var(--primary-100); }
+.product-card .title { font-weight: 700; margin: 8px 0 4px; }
+.product-card .price { color: var(--primary); font-weight: 700; margin-bottom: 10px; }
+.product-card .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Tablas */
+table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(2, 6, 23, .06); }
+th, td { border-bottom: 1px solid #eef2f7; padding: 12px 14px; text-align: left; }
+th { background: #fff1f2; color: #7f1d1d; text-transform: uppercase; font-size: 12px; letter-spacing: .5px; }
+tr:nth-child(even) td { background: #fafafa; }
+tr:hover td { background: #fdf2f2; }
+
+/* Formularios */
+input, textarea, select { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: #fff; color: var(--text); }
+label { display: block; font-size: 13px; color: var(--muted); margin: 8px 0 4px; }
+form .btn { margin-top: 10px; }
+
+/* Utilidades */
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+.badge { display: inline-block; background: var(--primary-100); color: var(--primary); padding: 4px 8px; border-radius: 999px; font-weight: 700; font-size: 12px; }
+
+/* Enlaces */
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Títulos */
+h2 { margin: 10px 0 16px; }

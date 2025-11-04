@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Pedidos</h2>
+{% if orders and orders|length > 0 %}
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Descripción</th>
+  </tr>
+  {% for o in orders %}
+  <tr>
+    <td>{{ o.id if o.id else o['id'] }}</td>
+    <td>{{ o.description if o.description else o['description'] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No hay pedidos registrados.</p>
+{% endif %}
+
+<a class="btn" href="{{ url_for('admin_report') }}">Descargar reporte CSV</a>
+<a class="btn" href="{{ url_for('admin') }}">Volver</a>
+{% endblock %}

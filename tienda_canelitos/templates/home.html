@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <a href="{{ url_for('admin') }}" class="btn">Admin</a>
+    <a href="{{ url_for('seller') }}" class="btn">Vendedor</a>
+    <a href="{{ url_for('cart') }}" class="btn">Carrito</a>
+</div>
+
+<h2>Productos：</h2>
+<div class="product-grid">
+  {% for product_name, product_info in products.items() %}
+  <div class="product-card">
+  <img src="{{ url_for('images', filename=product_info.image) }}" alt="{{ product_name }}">
+    <div class="title">{{ product_name }}</div>
+    <div class="price">${{ "%.2f"|format(product_info.price) }}</div>
+    <div class="actions">
+      <a href="{{ url_for('product_detail', name=product_name) }}" class="btn secondary">Ver</a>
+      <a href="{{ url_for('add_to_cart', name=product_name) }}" class="btn">Agregar</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

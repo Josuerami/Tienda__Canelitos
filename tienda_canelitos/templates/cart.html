@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Tu carrito de compras ：</h2>
+{% if cart %}
+<table>
+    <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+    </tr>
+    {% for item in cart %}
+    <tr>
+        <td>{{ item.name if item.name else item["name"] }}<br>$ {{ '%.2f'|format(item.price if item.price else item["price"]) }}//pieza</td>
+        <td>
+          $ {{ '%.2f'|format(item.price if item.price else item["price"]) }}
+          <form method="POST" action="{{ url_for('cart_remove', index=loop.index0) }}" style="display:inline;">
+            <button type="submit" class="btn">Eliminar</button>
+          </form>
+        </td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td><strong>Total：</strong></td>
+        <td><strong>${{ "%.2f"|format(total) }}</strong></td>
+    </tr>
+</table>
+
+<div class="card" style="margin-top:12px;">
+  <h3 style="margin:6px 0 10px;">Método de pago</h3>
+  <div class="row">
+    <form method="POST" action="{{ url_for('set_payment_method', method='transferencia') }}">
+      <button type="submit" class="btn secondary">Transferencia</button>
+    </form>
+    <form method="POST" action="{{ url_for('set_payment_method', method='tarjeta') }}">
+      <button type="submit" class="btn secondary">Tarjeta</button>
+    </form>
+    <form method="POST" action="{{ url_for('set_payment_method', method='efectivo') }}">
+      <button type="submit" class="btn secondary">Efectivo</button>
+    </form>
+  </div>
+  {% if session.get('payment_method') %}
+  <p style="margin-top:8px;">Seleccionado: <span class="badge">{{ session.get('payment_method') }}</span></p>
+  {% endif %}
+</div>
+
+<form method="POST" action="{{ url_for('checkout') }}" style="display:inline;">
+  <button type="submit" class="btn success">Confirmar Compra</button>
+</form>
+<form method="POST" action="{{ url_for('cart_clear') }}" style="display:inline;">
+  <button type="submit" class="btn warning">Vaciar Carrito</button>
+</form>
+<a href="{{ url_for('home') }}" class="btn secondary">Seguir comprando</a>
+{% else %}
+<p>Carrito vacío</p>
+{% endif %}
+{% endblock %}

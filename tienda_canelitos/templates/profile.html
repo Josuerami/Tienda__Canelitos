@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Perfil</h2>
+<div class="card" style="margin-bottom:14px;">
+  <div><strong>Usuario:</strong> {{ user or 'Invitado' }}</div>
+  <div><strong>Nombre:</strong> {{ display_name or '-' }}</div>
+  <div class="row" style="margin-top:8px;">
+    <form method="POST" action="{{ url_for('update_name') }}">
+      <label>Nuevo nombre</label>
+      <input name="name" placeholder="Escribe tu nombre" />
+      <button type="submit" class="btn secondary" style="margin-top:8px;">Guardar nombre</button>
+    </form>
+    <form method="POST" action="{{ url_for('update_contact') }}">
+      <label>Nuevo correo/teléfono</label>
+      <input name="contact" placeholder="Escribe tu correo o teléfono" />
+      <button type="submit" class="btn secondary" style="margin-top:8px;">Guardar contacto</button>
+    </form>
+  </div>
+</div>
+
+<h3>Resumen de ventas</h3>
+<table>
+  <tr><th>Periodo</th><th>Monto</th></tr>
+  <tr><td>Día</td><td>$0.00</td></tr>
+  <tr><td>Semana</td><td>$0.00</td></tr>
+  <tr><td>Mes</td><td>$0.00</td></tr>
+</table>
+
+<div style="margin-top:12px;">
+  <a href="{{ url_for('logout') }}" class="btn warning">Cerrar sesión</a>
+</div>
+{% endblock %}
