@@ -9,13 +9,13 @@
     <header>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
             <div>
-                <button onclick="window.location.href='{{ url_for('home') if session.get('user') else url_for('login') }}'" class="btn">Inicio</button>
-                <button onclick="history.back()" class="btn">Retroceder</button>
+                <a class="btn" href="{{ url_for('home') if session.get('user') else url_for('login') }}">Inicio</a>
+                <a class="btn" href="{{ url_for('home') if session.get('user') else url_for('login') }}">Retroceder</a>
             </div>
             <h1>Tienda Canelitos</h1>
-            {% if user %}
+            {% if session.get('user') %}
                 <div class="user-info">
-                    Bienvenido: {{ user }}
+                    Bienvenido: {{ session.get('user') }}
                     <a href="{{ url_for('profile') }}">Perfil</a> |
                     <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
                 </div>
