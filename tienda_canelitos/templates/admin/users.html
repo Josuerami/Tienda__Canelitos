@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Gestionar Usuarios</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo/Teléfono</th>
+        <th>Rol</th>
+        <th>Activo</th>
+        <th>Acciones</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.role }}</td>
+        <td>{% if user.active %}Sí{% else %}No{% endif %}</td>
+        <td>
+            <a href="#" class="btn">Editar</a>
+            <a href="#" class="btn">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{{ url_for('admin_create_user') }}" class="btn">Crear nuevo usuario</a>
+{% endblock %}

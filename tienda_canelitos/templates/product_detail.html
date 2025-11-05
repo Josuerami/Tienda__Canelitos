@@ -1,19 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>{{ product_name }}</h2>
+<h2>{{ product.name }}</h2>
 <a href="{{ url_for('home') }}" class="btn secondary">Regresar</a>
 
 <div class="row" style="align-items:flex-start; margin-top:10px;">
   <div class="card" style="max-width:380px;">
-    {# Usar la info del producto pasada desde app.py; fallback al placeholder local #}
-    {% set imgfile = (product_info.image if product_info else 'placeholder.svg') %}
-  <img src="{{ url_for('images', filename=imgfile) }}" alt="{{ product_name }}" style="width:100%; height:260px; object-fit:cover; border-radius:10px; background:#fee2e2;">
+    <img src="{{ url_for('img', filename=product.image or 'placeholder.svg') }}" alt="{{ product.name }}" style="width:100%; height:260px; object-fit:cover; border-radius:10px; background:#fee2e2;">
   </div>
   <div class="card" style="flex:1;">
-    <p><strong>Precio:</strong> ${{ '%.2f'|format(product_info.price if product_info else 15.00) }}</p>
-    <p><strong>Descripción:</strong> Producto de tienda.</p>
+    <p><strong>Precio:</strong> ${{ '%.2f'|format(product.price) }}</p>
+    <p><strong>Descripción:</strong> {{ product.category }}.</p>
     <div class="row">
-      <a href="{{ url_for('add_to_cart', name=product_name) }}" class="btn">Agregar al carrito</a>
+      <a href="{{ url_for('add_to_cart', pid=product.id) }}" class="btn">Agregar al carrito</a>
     </div>
   </div>
 </div>

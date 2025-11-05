@@ -9,9 +9,9 @@
     </tr>
     {% for item in cart %}
     <tr>
-        <td>{{ item.name if item.name else item["name"] }}<br>$ {{ '%.2f'|format(item.price if item.price else item["price"]) }}//pieza</td>
+        <td>{{ item.name }}<br>$ {{ '%.2f'|format(item.price) }}//pieza</td>
         <td>
-          $ {{ '%.2f'|format(item.price if item.price else item["price"]) }}
+          $ {{ '%.2f'|format(item.price) }}
           <form method="POST" action="{{ url_for('cart_remove', index=loop.index0) }}" style="display:inline;">
             <button type="submit" class="btn">Eliminar</button>
           </form>

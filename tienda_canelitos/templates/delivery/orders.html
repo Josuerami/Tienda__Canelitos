@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Órdenes para Entregar</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Producto</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.cliente }}</td>
+        <td>{{ order.producto }}</td>
+        <td>{{ order.status }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('update_order_status', oid=order.id) }}">
+                <select name="status" required>
+                    <option value="Pendiente" {% if order.status == 'Pendiente' %}selected{% endif %}>Pendiente</option>
+                    <option value="En camino" {% if order.status == 'En camino' %}selected{% endif %}>En camino</option>
+                    <option value="Entregado" {% if order.status == 'Entregado' %}selected{% endif %}>Entregado</option>
+                    <option value="Cancelado" {% if order.status == 'Cancelado' %}selected{% endif %}>Cancelado</option>
+                </select>
+                <button type="submit" class="btn">Actualizar</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

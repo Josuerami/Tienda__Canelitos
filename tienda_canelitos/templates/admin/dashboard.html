@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Tienda Canelitos Administrador</h2>
+<div>
+    <a href="{{ url_for('admin_products') }}" class="btn">Inventario de Productos</a>
+    <a href="{{ url_for('admin_orders') }}" class="btn">Consultar pedidos</a>
+    <a href="{{ url_for('admin_users') }}" class="btn">Gestionar usuarios</a>
+    <a href="{{ url_for('admin_create_user') }}" class="btn">Agregar usuario</a>
+</div>
+
+<div style="margin:15px 0;">
+    <div>Ventas del Día: ${{ ventas }}</div>
+    <div>Tickets Emitidos: {{ tickets }}</div>
+    <div>Vendedores activos: {{ empleados }}</div>
+</div>
+{% endblock %}

@@ -9,13 +9,18 @@
     <header>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
             <div>
-                <a class="btn" href="{{ url_for('home') if session.get('user') else url_for('login') }}">Inicio</a>
-                <a class="btn" href="{{ url_for('home') if session.get('user') else url_for('login') }}">Retroceder</a>
+                {% if session.user_role == 'admin' %}
+                    <a class="btn" href="{{ url_for('admin_dashboard') }}">Admin</a>
+                {% elif session.user_role == 'seller' %}
+                    <a class="btn" href="{{ url_for('seller_dashboard') }}">Vendedor</a>
+                {% elif session.user_role == 'delivery' %}
+                    <a class="btn" href="{{ url_for('delivery_orders') }}">Repartidor</a>
+                {% endif %}
             </div>
             <h1>Tienda Canelitos</h1>
-            {% if session.get('user') %}
+            {% if session.user %}
                 <div class="user-info">
-                    Bienvenido: {{ session.get('user') }}
+                    Bienvenido：{{ session.user }}
                     <a href="{{ url_for('profile') }}">Perfil</a> |
                     <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
                 </div>
@@ -23,9 +28,14 @@
         </div>
     </header>
     <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <div style="color:red; margin:10px 0;">{{ msg }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
     </main>
-    <footer>
-    </footer>
 </body>
 </html>

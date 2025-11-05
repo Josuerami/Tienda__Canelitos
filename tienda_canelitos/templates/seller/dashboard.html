@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Vendedor: {{ session.user_name }}</h2>
+<div>
+    <a href="{{ url_for('admin_orders') }}" class="btn">Consultar pedidos</a>
+    <a href="{{ url_for('admin_products') }}" class="btn">Inventario de Productos</a>
+</div>
+
+<div style="margin:15px 0;">
+    <div>Ventas del Día: ${{ ventas }}</div>
+    <div>Tickets Emitidos: {{ tickets }}</div>
+</div>
+{% endblock %}
