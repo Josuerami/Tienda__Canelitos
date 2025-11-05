@@ -229,18 +229,11 @@ def admin_report():
             pass
 
     html = render_template('report_orders.html', orders=orders)
-    try:
-        from weasyprint import HTML
-        pdf_io = io.BytesIO()
-        HTML(string=html).write_pdf(pdf_io)
-        pdf_io.seek(0)
-        return send_file(pdf_io, mimetype='application/pdf', as_attachment=True, download_name='reporte_pedidos.pdf')
-    except Exception:
-        # Fallback: HTML imprimible
-        mem = io.BytesIO()
-        mem.write(html.encode('utf-8'))
-        mem.seek(0)
-        return send_file(mem, mimetype='text/html', as_attachment=True, download_name='reporte_pedidos.html')
+    # Fallback: HTML imprimible (WeasyPrint no disponible en Windows sin GTK)
+    mem = io.BytesIO()
+    mem.write(html.encode('utf-8'))
+    mem.seek(0)
+    return send_file(mem, mimetype='text/html', as_attachment=True, download_name='reporte_pedidos.html')
 
 # === VENDEDOR ===
 @app.route('/seller')

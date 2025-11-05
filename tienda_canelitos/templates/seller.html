@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Vendedor：nombre</h2>
+<h2>Vendedor: {{ session.get('user', 'Nombre') }}</h2>
 <div>
     <a href="{{ url_for('admin_orders') }}" class="btn">Consultar pedidos</a>
     <a href="#" class="btn" onclick="alert('Función no implementada'); return false;">Agregar Productos</a>
-    <a href="{{ url_for('admin_report') }}" class="btn">Generar reporte de ventas (PDF)</a>
+    <a href="{{ url_for('admin_report') }}" class="btn">Generar reporte de ventas (HTML)</a>
     <a href="{{ url_for('admin_inventory') }}" class="btn">Inventario de Productos</a>
 </div>
 
 <div style="margin:15px 0;">
-    <div>Ventas del Dia ： 10000$</div>
-    <div>Tickets Emitidos：74</div>
+    <div>Ventas del Día: $10,000</div>
+    <div>Tickets Emitidos: 74</div>
 </div>
 
 <div style="margin-top:20px;">
     <div style="display:flex;justify-content:space-between;font-weight:bold;">
         <span>Anterior mes</span>
-        <span>OCTOBER 2025</span>
-        <span>siguiente mes</span>
+        <span>Octubre 2024</span>
+        <span>Siguiente mes</span>
     </div>
     <div style="display:grid;grid-template-columns:repeat(7,1fr);font-size:12px;text-align:center;">
         <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
@@ -32,16 +32,16 @@
 <h3>Ganancias Realizadas</h3>
 <table>
     <tr>
-        <th>Producto：</th>
-        <th>Mes：</th>
-        <th>semana：</th>
-        <th>Total：</th>
+        <th>Producto</th>
+        <th>Mes</th>
+        <th>Semana</th>
+        <th>Total</th>
     </tr>
     <tr>
-        <td>Coca-Cola 355 ml $15.00//pieza</td>
-        <td>ganancia de 12.000</td>
-        <td>ganancia de 12,000</td>
-        <td>total de ganancia 24.000</td>
+        <td>Coca-Cola 355 ml $15.00/pieza</td>
+        <td>Ganancia de $12,000</td>
+        <td>Ganancia de $12,000</td>
+        <td>Total de ganancia $24,000</td>
     </tr>
 </table>
 {% endblock %}

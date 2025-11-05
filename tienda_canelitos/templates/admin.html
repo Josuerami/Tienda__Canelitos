@@ -6,12 +6,12 @@
     <a href="{{ url_for('admin_orders') }}" class="btn">Consultar pedidos</a>
     <a href="#" class="btn" onclick="alert('Función no implementada'); return false;">Agregar producto</a>
     <a href="{{ url_for('register') }}" class="btn">Agregar usuario</a>
-    <a href="{{ url_for('admin_report') }}" class="btn">Generar reporte de ventas (PDF)</a>
+    <a href="{{ url_for('admin_report') }}" class="btn">Generar reporte de ventas (HTML)</a>
 </div>
 
 <div style="margin:15px 0;">
-    <div>Ventas del Dia ： 10000$</div>
-    <div>Tickets Emitidos：74</div>
-    <div>Vendedores activos ：4</div>
+    <div>Ventas del Día: $10,000</div>
+    <div>Tickets Emitidos: 74</div>
+    <div>Vendedores activos: 4</div>
 </div>
 {% endblock %}
