@@ -1,4 +1,83 @@
 {% extends "base.html" %}
+{% block title %}Carrito de Compras{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <h2>Mi Carrito</h2>
+    {% if cart %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart %}
+            <tr>
+              <td>{{ item.name }}</td>
+              <td>${{ "%.2f"|format(item.price) }}</td>
+              <td>
+                <form action="{{ url_for('cart_remove', index=loop.index0) }}" method="POST" style="display:inline">
+                  <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td><strong>Total</strong></td>
+            <td colspan="2"><strong>${{ "%.2f"|format(total) }}</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+      <form action="{{ url_for('cart_clear') }}" method="POST" class="mb-3">
+        <button type="submit" class="btn btn-warning">Vaciar Carrito</button>
+      </form>
+    {% else %}
+      <p class="alert alert-info">Tu carrito está vacío</p>
+    {% endif %}
+  </div>
+
+  {% if cart %}
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Finalizar Compra</h3>
+          <form action="{{ url_for('checkout') }}" method="POST">
+            <div class="mb-3">
+              <label for="payment_method" class="form-label">Método de Pago</label>
+              <select name="payment_method" id="payment_method" class="form-select" required>
+                <option value="">Selecciona un método</option>
+                <option value="efectivo">Efectivo</option>
+                <option value="tarjeta">Tarjeta</option>
+                <option value="transferencia">Transferencia</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="delivery_address" class="form-label">Dirección de Entrega</label>
+              <textarea name="delivery_address" id="delivery_address" 
+                  class="form-control" rows="3" required 
+                  placeholder="Ingresa tu dirección completa"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Total a Pagar</label>
+              <p class="form-control-static"><strong>${{ "%.2f"|format(total) }}</strong></p>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg w-100">Confirmar Compra</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
 {% block content %}
 <h2>Tu carrito de compras</h2>
 {% if cart %}

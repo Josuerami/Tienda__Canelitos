@@ -13,6 +13,7 @@
   --border: #e2e8f0;      /* bordes */
   --shadow: 0 6px 16px rgba(2, 6, 23, .08);
 }
+  /* Colores del sistema */
 
 * { box-sizing: border-box; }
 html, body {
@@ -25,14 +26,77 @@ html, body {
 
 header {
   position: sticky; top: 0; z-index: 50;
+  /* Estados de pedidos */
+  --estado-pendiente: var(--warning);
+  --estado-proceso: #0ea5e9;     /* azul */
+  --estado-camino: #6366f1;      /* indigo */
+  --estado-entregado: var(--success);
+  --estado-cancelado: #ef4444;   /* rojo error */
   background: linear-gradient(90deg, var(--primary), #7f1d1d);
   color: white; padding: 12px 20px; box-shadow: var(--shadow);
 }
+.form-row { display: flex; gap: 16px; margin-bottom: 16px; }
+.form-row > * { flex: 1; }
+.form-help { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.required::after { content: "*"; color: var(--primary); margin-left: 4px; }
 header h1 { margin: 0; font-size: 20px; letter-spacing: .5px; }
+/* Estados de pedido */
+.status { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.status.pendiente { background: #fef9c3; color: var(--estado-pendiente); }
+.status.proceso { background: #e0f2fe; color: var(--estado-proceso); }
+.status.camino { background: #e0e7ff; color: var(--estado-camino); }
+.status.entregado { background: #dcfce7; color: var(--estado-entregado); }
+.status.cancelado { background: #fee2e2; color: var(--estado-cancelado); }
 header .user-info { font-size: 14px; }
+/* Dashboard cards */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 24px 0; }
+.stat-card { background: #fff; padding: 20px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.stat-card .label { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+.stat-card .value { font-size: 32px; font-weight: 700; color: var(--primary); }
+.stat-card .trend { font-size: 14px; margin-top: 8px; }
+.stat-card .trend.up { color: var(--success); }
+.stat-card .trend.down { color: var(--estado-cancelado); }
 header .user-info a { color: #fff; text-decoration: underline; }
+/* Modal fixes */
+.modal { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); }
+.modal-content { border: none; border-radius: 16px; box-shadow: var(--shadow); }
+.modal-header { background: var(--primary-100); color: var(--primary); border: none; }
+.modal-footer { border-color: var(--border); }
 
+/* Checkout section */
+.checkout-summary { position: sticky; top: 24px; }
+.checkout-steps { counter-reset: step; }
+.checkout-step { position: relative; padding-left: 32px; margin-bottom: 24px; }
+.checkout-step::before { 
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+}
 main { max-width: 1100px; margin: 24px auto; padding: 0 18px; }
+/* Profile page */
+.profile-header {
+    background: linear-gradient(to right, var(--primary), var(--primary-600));
+    color: white;
+    padding: 40px 0;
+    margin: -24px -18px 24px;
+}
+.profile-header h1 { margin: 0; }
+.profile-header .meta { opacity: 0.8; margin-top: 8px; }
+.profile-section { margin-bottom: 32px; }
+.profile-section h3 { color: var(--primary); margin-bottom: 16px; }
 footer { background: #0b1220; color: #cbd5e1; padding: 24px; margin-top: 40px; text-align: center; }
 
 /* Botones visibles y con buen contraste */

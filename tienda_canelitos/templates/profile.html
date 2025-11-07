@@ -1,4 +1,118 @@
 {% extends "base.html" %}
+{% block title %}Mi Perfil{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Mis Datos</h2>
+        <form method="POST" action="{{ url_for('profile') }}">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre Completo</label>
+            <input type="text" class="form-control" id="name" name="name"
+                 value="{{ user.name }}" required>
+          </div>
+                    
+          <div class="mb-3">
+            <label for="username" class="form-label">Usuario</label>
+            <input type="text" class="form-control" id="username" 
+                 value="{{ user.username }}" readonly>
+          </div>
+                    
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email"
+                 value="{{ user.email }}" required>
+          </div>
+                    
+          <div class="mb-3">
+            <label for="contact" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="contact" name="contact"
+                 value="{{ user.contact }}">
+          </div>
+                    
+          <button type="submit" class="btn btn-primary">Actualizar Datos</button>
+        </form>
+      </div>
+    </div>
+  </div>
+    
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Mis Pedidos</h2>
+                
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Detalles</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+              <tr>
+                <td>{{ order.created_at.strftime('%d/%m/%Y') }}</td>
+                <td>${{ "%.2f"|format(order.total_amount) }}</td>
+                <td>
+                  <span class="badge bg-{{ order.status_color }}">
+                    {{ order.status }}
+                  </span>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-info" 
+                      data-bs-toggle="modal" 
+                      data-bs-target="#orderModal{{ order.id }}">
+                    Ver
+                  </button>
+                </td>
+              </tr>
+                            
+              <!-- Modal para detalles -->
+              <div class="modal fade" id="orderModal{{ order.id }}" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Detalles del Pedido</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p><strong>Fecha:</strong> {{ order.created_at.strftime('%d/%m/%Y %H:%M:%S') }}</p>
+                      <p><strong>Estado:</strong> {{ order.status }}</p>
+                      <p><strong>Método de Pago:</strong> {{ order.payment_method }}</p>
+                      <p><strong>Dirección:</strong> {{ order.delivery_address }}</p>
+                                            
+                      <h6>Productos:</h6>
+                      <ul class="list-unstyled">
+                      {% for detail in order.details %}
+                        <li>{{ detail.product_name }} - ${{ "%.2f"|format(detail.unit_price) }}</li>
+                      {% endfor %}
+                      </ul>
+                                            
+                      <p class="text-end">
+                        <strong>Total:</strong> ${{ "%.2f"|format(order.total_amount) }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              <tr>
+                <td colspan="4" class="text-center">No hay pedidos registrados</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
 {% block content %}
 <h2>Perfil</h2>
 <div class="card" style="margin-bottom:14px;">
